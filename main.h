@@ -1,53 +1,43 @@
-#ifndef MAIN_H
-#define MAIN_H
-
-#include <stdio.h>
+#ifndef MAIN_FUNC_H
+#define MAIN_FUNC_H
+#include <unistd.h>
 #include <stdlib.h>
-#include <limits.h>
-#include <unistd.h> 
 #include <stdarg.h>
 
-int _printf(const char *format, ...);
-int print_char(va_list ap);
-int print_str(va_list ap);
-int print_nbr(va_list ap);
-int print_binary(va_list ap);
-int print_octal(va_list ap);
-int print_hexa_lower(va_list ap);
-int print_hexa_upper(va_list ap);
-int print_unsigned(va_list ap);
-int print_str_unprintable(va_list ap);
-int print_str_reverse(va_list ap);
-int print_ptr(va_list ap);
-int print_rot13(va_list ap);
-int print_percent(va_list ap __attribute__((unused)));
-int print_number(int n);
-int print_unsigned_number(unsigned int n);
-int print_o(va_list o);
-int print_b(va_list b);
-int print_u(va_list u);
-int _putchar(char c);
-int _puts(char *str, int ascii);
-int _nbr_len(int prmNumber);
-int print_buf(char *buf, unsigned int nbuf);
-int (*get_op(const char c))(va_list);
-int _strlen_recursion(char *s);
-int convert_alpha_numeric(int nb, int upper);
-char *convert_rot13(char *str);
-char *convert_base(unsigned long nb, unsigned int base, int upper);
-char *_strdup(char *str);
-char *convert_base_pointer(unsigned long p);
-char *_itoa(int prmNumber);
-
 /**
- * struct flags_printf - struct conversion to function
- * @c: flag string
- * @f: pointer to func
- */
-
-typedef struct flags_printf
+* struct convert - defines a struct for symbols and func
+*
+* @sym: The operator
+* @f: The function associated
+*/
+struct convert
 {
-	char *c;
+	char *sym;
 	int (*f)(va_list);
-} flags_p;
+};
+typedef struct convert conver_t;
+
+int parser(const char *format, conver_t f_list[], va_list arg_list);
+int _printf(const char *format, ...);
+int _write_char(char);
+int print_char(va_list);
+int print_str(va_list);
+int print_reversed(va_list arg);
+int rot13(va_list);
+int unsigned_integer(va_list);
+int print_octal(va_list list);
+int print_hex(va_list list);
+int print_heX(va_list list);
+
+int print_percent(va_list);
+int print_int(va_list);
+int print_num(va_list);
+int print_binary(va_list);
+
+unsigned int base_len(unsigned int, int);
+char *rev_string(char *);
+void write_base(char *str);
+char *_memcpy(char *dest, char *src, unsigned int n);
+int print_unsgined_number(unsigned int);
+
 #endif
