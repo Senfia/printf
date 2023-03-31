@@ -2,20 +2,20 @@
 #include <stdarg.h>
 
 /**
- * _printf - prints everything
- * @format: possible valid format specifier
+ * _printf - prints all
+ * @format: valid specifier
  * Return: 0
  */
 
 int _printf(const char *format, ...)
 {
-	int printed_chars;
+	int _chars;
 	conver_t f_list[] = {
 		{"c", print_char},
-		{"s", print_string},
+		{"s", print_str},
 		{"%", print_percent},
-		{"d", print_integer},
-		{"i", print_integer},
+		{"d", print_int},
+		{"i", print_int},
 		{"b", print_binary},
 		{"r", print_reversed},
 		{"R", rot13},
@@ -31,8 +31,7 @@ int _printf(const char *format, ...)
 		return (-1);
 
 	va_start(arg_list, format);
-	/*Calling parser function*/
-	printed_chars = parser(format, f_list, arg_list);
+	_chars = parser(format, f_list, arg_list);
 	va_end(arg_list);
-	return (printed_chars);
+	return (_chars);
 }
